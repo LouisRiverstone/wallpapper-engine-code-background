@@ -14,7 +14,7 @@ export default {
       interval: null,
       transitionAudioData: [],
       canvas: {
-        height: 30,
+        height: 70,
       },
     };
   },
