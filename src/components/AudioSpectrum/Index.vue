@@ -35,6 +35,8 @@ export default {
 
       const layer = new Konva.Layer();
 
+      this.transitionAudioData = window.audio ?? [];
+
       for (let x = 0; x < this.transitionAudioData.length; x++) {
         const audioValue = this.transitionAudioData[x];
 
@@ -92,16 +94,8 @@ export default {
         }
       }, 75);
     },
-    listener() {
-      if (window.wallpaperRegisterAudioListener) {
-        window.wallpaperRegisterAudioListener(function (data) {
-          this.transitionAudioData = data;
-        });
-      }
-    },
   },
   mounted() {
-    this.listener();
     this.draw();
   },
 };

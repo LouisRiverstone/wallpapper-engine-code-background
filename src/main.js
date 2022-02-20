@@ -7,5 +7,12 @@ import './css/material-palenight.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 
+window.audio = null
+
+if (window.wallpaperRegisterAudioListener) {
+    window.wallpaperRegisterAudioListener(function (data) {
+        window.audio = data;
+    });
+}
 
 const app = createApp(App).use(VueHighlightJS).mount('#app')
