@@ -1,17 +1,22 @@
 <template>
   <section class="main">
-    <div class="box">
-      <Editor />
+    <div class="d-flex flex-column box">
+      <Editor id="editor" />
+      <AudioSpectrum />
     </div>
   </section>
 </template>
 
 <script>
 import Editor from "./components/Editor/Index.vue";
+import AudioSpectrum from "./components/AudioSpectrum/Index.vue";
+import Smoke from "./components/Smoke/Index.vue";
 
 export default {
   components: {
     Editor,
+    AudioSpectrum,
+    Smoke,
   },
 };
 </script>

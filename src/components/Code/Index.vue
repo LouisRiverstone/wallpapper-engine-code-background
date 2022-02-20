@@ -12,11 +12,42 @@
           <span class="fake-text"></span>
         </div>
       </div>
-      <div class="d-flex flex-row justify-content-between">
-        <pre
-          v-highlightjs
-        ><code class="javascript" id="code">{{code}}</code></pre>
-        <span class="scroll"></span>
+      <div class="d-flex flex-column">
+        <div class="d-flex flex-row justify-content-between">
+          <pre
+            v-highlightjs
+          ><code class="javascript" id="code">{{code}}</code></pre>
+          <span class="scroll"></span>
+        </div>
+      </div>
+      <div class="d-flex flex-column">
+        <div class="d-flex flex-row terminal-header w-100 py-2">
+          <span class="fake-text terminal-header-spacement"></span>
+          <span class="fake-text terminal-header-spacement"></span>
+          <span class="fake-text terminal-header-spacement"></span>
+        </div>
+        <div class="d-flex flex-column py-2 px-2">
+          <span class="d-flex flex-row w-100 mb-2">
+            <span class="fake-text-large terminal-header-spacement"></span>
+            <span class="fake-text-large"></span>
+            <span class="fake-text terminal-header-spacement"></span>
+            <span class="fake-text-large"></span>
+          </span>
+          <span class="d-flex flex-row w-100 mb-2">
+            <span class="fake-text terminal-header-spacement"></span>
+            <span class="fake-text-large"></span>
+          </span>
+          <span class="d-flex flex-row w-100 mb-2">
+            <span class="fake-text-large terminal-header-spacement"></span>
+            <span class="fake-text-large"></span>
+            <span class="fake-text terminal-header-spacement"></span>
+          </span>
+          <span class="d-flex flex-row w-100 mb-2">
+            <span class="fake-text terminal-header-spacement"></span>
+            <span class="fake-text-large"></span>
+            <span class="fake-text terminal-header-spacement"></span>
+          </span>
+        </div>
       </div>
     </div>
   </section>
@@ -45,7 +76,7 @@ function merge(left, right) {
   },
   mounted() {
     new TypeIt("#code", {
-      speed: 120,
+      speed: 50,
       breakLines: true,
       cursor: true,
       loop: true,
@@ -63,6 +94,19 @@ section {
 
 code {
   padding: 0em;
+}
+
+.terminal {
+  background-color: #292d3e !important;
+}
+
+.terminal-header {
+  padding: 0px 0.5rem;
+  background-color: #414762;
+}
+
+.terminal-header-spacement {
+  margin: 0px 0.3rem;
 }
 
 .bar {
@@ -93,8 +137,15 @@ code {
   border-radius: 1rem;
 }
 
+.fake-text-large {
+  background-color: #51597c;
+  width: 5rem;
+  height: 0.5rem;
+  border-radius: 1rem;
+}
+
 .scroll {
-  height: 45rem;
+  height: 20rem;
   width: 1rem;
   background-color: #494f6e;
 }
