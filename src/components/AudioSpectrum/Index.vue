@@ -38,6 +38,7 @@ export default {
     draw() {
       const layer = new Konva.Layer();
       const editor = document.querySelector("#editor");
+
       this.transitionAudioData = window.audio ?? [];
 
       for (let x = 0; x < this.transitionAudioData.length; x++) {
