@@ -4,9 +4,10 @@
       <div class="w-100 bar d-flex flex-row">
         <div
           class="d-flex align-items-center section"
-          v-for="(k, i) in 2"
-          :class="{ selected: i == 0 }"
+          v-for="(k, i) in 5"
+          :class="{ selected: selected == i }"
           :key="i"
+          @click.prevent="$emit('setSelected', i)"
         >
           <span class="ball"></span>
           <span class="fake-text"></span>
@@ -16,7 +17,7 @@
         <div class="d-flex flex-row justify-content-between">
           <pre
             v-highlightjs
-          ><code class="javascript" id="code">{{code}}</code></pre>
+          ><code class="javascript" id="code">{{code[0]}}</code></pre>
           <span class="scroll"></span>
         </div>
       </div>
@@ -57,9 +58,18 @@
 import TypeIt from "typeit";
 
 export default {
+  props: {
+    selected: {
+      type: Number,
+      default: 0,
+    },
+  },
   data() {
     return {
-      code: `
+      tipeIt: null,
+      freezed: false,
+      code: [
+        `
 function merge(left, right) {
     let sortedArr = []; // the sorted elements will go here
     while (left.length && right.length) {
@@ -72,18 +82,44 @@ function merge(left, right) {
     }
 }
     `,
+        `console.log('hello world')`,
+      ],
     };
   },
-  mounted() {
-    new TypeIt("#code", {
-      speed: 50,
-      breakLines: true,
-      cursor: true,
-      loop: true,
-      cursorChar: "|",
-      lifeLike: true,
-    }).go();
+  methods: {
+    start() {
+      if (this.tipeIt) {
+        console.log({ ...this.tipeIt });
+        this.tipeIt.destroy(true);
+      }
+
+      this.tipeIt = new TypeIt("#code", {
+        speed: 50,
+        breakLines: true,
+        cursor: true,
+        loop: true,
+        cursorChar: "|",
+        lifeLike: true,
+      }).go();
+    },
+    freeze() {
+      if (this.freezed) {
+        this.tipeIt.unfreeze();
+        this.freezed = false;
+      } else {
+        this.tipeIt.freeze();
+        this.freezed = true;
+      }
+    },
   },
+  mounted() {
+    this.start();
+  },
+  // watch: {
+  //   selected() {
+  //     this.start();
+  //   },
+  // },
 };
 </script>
 

@@ -2,10 +2,10 @@
   <section class="d-flex flex-column shadow-lg rounded">
     <Systembar />
     <div class="d-flex flex-row">
-      <Sidebar />
-      <Code />
+      <Sidebar ref="sidebar" @setSelected="setSelected" :selected="selected" />
+      <Code :selected="selected" @setSelected="setSelected" />
     </div>
-    <div class="bar w-100"></div>
+    <div class="bar w-100">{{ selected }}</div>
   </section>
 </template>
 
@@ -19,6 +19,14 @@ export default {
     Code,
     Sidebar,
     Systembar,
+  },
+  data() {
+    return { selected: 0 };
+  },
+  methods: {
+    setSelected(id) {
+      this.selected = id;
+    },
   },
 };
 </script>

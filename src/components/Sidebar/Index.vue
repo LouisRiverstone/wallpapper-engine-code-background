@@ -4,7 +4,7 @@
     <div class="d-flex flex-column list py-1">
       <div class="d-flex justify-content-between py-2 px-2">
         <div class="d-flex">
-          <span class="fake-text"></span>
+          <span class="fake-text"> </span>
         </div>
         <div class="d-flex flex-row justify-content-end align-items-center">
           <span class="ball-mini"></span>
@@ -27,7 +27,7 @@
         <span class="spacement"></span>
         <span class="fake-text"></span>
       </div>
-      <List />
+      <List @setSelected="setSelected" :selected="selected" />
     </div>
   </section>
 </template>
@@ -37,9 +37,20 @@ import List from "../List/Index.vue";
 import Menu from "../Menu/Index.vue";
 
 export default {
+  props: {
+    selected: {
+      type: Number,
+      default: 0,
+    },
+  },
   components: {
     List,
     Menu,
+  },
+  methods: {
+    setSelected(index) {
+      this.$emit("setSelected", index);
+    },
   },
 };
 </script>

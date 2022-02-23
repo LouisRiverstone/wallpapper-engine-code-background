@@ -1,11 +1,13 @@
 <template>
-  <div :id="id"></div>
+  <section>
+    <div :id="id"></div>
+  </section>
 </template>
 
 <script>
 import { v4 as uuidv4 } from "uuid";
 import Konva from "konva";
-import { computed } from "@vue/runtime-core";
+import SmokeMachine from "@bijection/smoke";
 
 export default {
   data() {
@@ -14,7 +16,7 @@ export default {
       interval: null,
       transitionAudioData: [],
       canvas: {
-        height: 70,
+        height: 100,
       },
     };
   },
@@ -24,7 +26,7 @@ export default {
     },
   },
   methods: {
-    draw() {
+    setup() {
       const editor = document.querySelector("#editor");
 
       this.stage = new Konva.Stage({
@@ -32,9 +34,10 @@ export default {
         width: editor.offsetWidth,
         height: this.canvas.height,
       });
-
+    },
+    draw() {
       const layer = new Konva.Layer();
-
+      const editor = document.querySelector("#editor");
       this.transitionAudioData = window.audio ?? [];
 
       for (let x = 0; x < this.transitionAudioData.length; x++) {
@@ -44,7 +47,7 @@ export default {
           x: 0 + (x * editor.offsetWidth) / 128,
           y: 0,
           width: editor.offsetWidth / 128 - 1,
-          height: audioValue * this.canvas.height,
+          height: audioValue * (this.canvas.height - 20),
 
           fillLinearGradientStartPoint: {
             x: 0,
@@ -73,14 +76,11 @@ export default {
 
       this.stage.add(layer);
 
-      layer.draw();
-
-      const intervaler = setInterval(() => {
-        this.stage.destroy();
-        clearInterval(intervaler);
+      const timeout = setTimeout(() => {
+        this.stage.destroyChildren();
+        clearTimeout(timeout);
+        requestAnimationFrame(this.draw);
       }, 1000 / 60);
-
-      requestAnimationFrame(this.draw);
     },
     debug() {
       if (this.interval) {
@@ -96,6 +96,8 @@ export default {
     },
   },
   mounted() {
+    this.setup();
+    // this.debug();
     this.draw();
   },
 };

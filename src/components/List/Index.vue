@@ -10,9 +10,10 @@
         py-1
         list
       "
-      :class="{ selected: i == 0 }"
+      :class="{ selected: selected == i }"
       v-for="(k, i) in 5"
       :key="i"
+      @click.prevent="select(i)"
     >
       <span class="ball"></span>
       <span class="spacement"></span>
@@ -22,7 +23,19 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    selected: {
+      type: Number,
+      default: 0,
+    },
+  },
+  methods: {
+    select(index) {
+      this.$emit("setSelected", index);
+    },
+  },
+};
 </script>
 
 <style scoped>
