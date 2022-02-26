@@ -5,7 +5,7 @@
       <Sidebar ref="sidebar" @setSelected="setSelected" :selected="selected" />
       <Code :selected="selected" @setSelected="setSelected" />
     </div>
-    <div class="bar w-100">{{ selected }}</div>
+    <div class="bar w-100"></div>
   </section>
 </template>
 
